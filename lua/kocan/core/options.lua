@@ -41,6 +41,5 @@ opt.splitbelow = true -- split horizontal window to the bottom
 
 -- turn off swapfile
 opt.swapfile = false
-
 -- turn off ~ on end of buffer
 opt.fillchars:append({ eob = " " })
