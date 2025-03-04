@@ -1,5 +1,34 @@
 A modern Neovim configuration focused on development with TypeScript, JavaScript, Svelte, Python, and Lua.
 
+## Structure
+
+The configuration is organized in a modular structure:
+
+- `init.lua` - Entry point
+- `lua/kocan/lazy.lua` - Plugin manager setup
+- `lua/kocan/core/` - Core Neovim settings
+  - `init.lua` - Core initialization
+  - `keymaps.lua` - Global key mappings
+  - `options.lua` - Neovim options
+- `lua/kocan/plugins/` - Plugin configurations
+  - Individual plugin configurations (alpha, nvim-tree, telescope, etc.)
+  - `init.lua` - Plugin initialization
+- `lua/kocan/plugins/lsp/` - LSP-specific configurations
+  - `lspconfig.lua` - Language server settings
+  - `mason.lua` - LSP installer configuration
+
+## Requirements
+
+- Neovim >= 0.8.0
+- Git
+- A Nerd Font for icons
+- Node.js (for TypeScript/JavaScript related tooling)
+- Python (for Python related tooling)
+
+## Customization
+
+Feel free to customize the configuration according to your preferences by modifying the files in the `lua/kocan/` directory.
+
 ## Features
 
 - **Plugin Management**: Uses Lazy.nvim for efficient plugin management
