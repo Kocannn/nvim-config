@@ -43,3 +43,5 @@ opt.splitbelow = true -- split horizontal window to the bottom
 opt.swapfile = false
 -- turn off ~ on end of buffer
 opt.fillchars:append({ eob = " " })
+
+opt.updatetime = 300 -- time to wait for commands to be triggered in ms

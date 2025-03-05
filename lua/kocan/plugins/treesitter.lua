@@ -28,6 +28,7 @@ return {
 				"json",
 				"javascript",
 				"typescript",
+				"go",
 				"tsx",
 				"yaml",
 				"html",
