@@ -23,3 +23,8 @@ opt.wrap = false -- disable line wrapping
 -- search settings
 opt.ignorecase = true -- ignore case when searching
 opt.smartcase = true -- if you include mixed case in your search, assumes you want case-sensitive
+opt.mouse = ""
+
+vim.lsp.set_log_level("off")
+vim.g.matchparen_timeout = 2
+vim.g.matchparen_insert_timeout = 2
