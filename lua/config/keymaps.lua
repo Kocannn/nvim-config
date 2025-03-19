@@ -18,7 +18,14 @@ keymap.set("n", "<Leader>d", '"_d')
 keymap.set("n", "<Leader>D", '"_D')
 keymap.set("v", "<Leader>d", '"_d')
 keymap.set("v", "<Leader>D", '"_D')
+keymap.set("n", "H", "^")
+keymap.set("v", "H", "^")
+----------------------------------------------------------- Goto line end [ L ]
+keymap.set("n", "L", "$")
+keymap.set("v", "L", "$")
 
+keymap.set("n", "M", "%")
+keymap.set("v", "M", "%")
 -- Increment/decrement
 keymap.set("n", "+", "<C-a>")
 keymap.set("n", "-", "<C-x>")
