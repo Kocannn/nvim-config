@@ -18,11 +18,11 @@ keymap.set("n", "<Leader>d", '"_d')
 keymap.set("n", "<Leader>D", '"_D')
 keymap.set("v", "<Leader>d", '"_d')
 keymap.set("v", "<Leader>D", '"_D')
-keymap.set("n", "H", "^")
-keymap.set("v", "H", "^")
------------------------------------------------------------ Goto line end [ L ]
-keymap.set("n", "L", "$")
-keymap.set("v", "L", "$")
+keymap.set("n", "<C-h>", "^")
+keymap.set("v", "<C-h>", "^")
+-- Goto line end [ L ]
+keymap.set("n", "<C-l>", "$")
+keymap.set("v", "<C-l>", "$")
 
 keymap.set("n", "M", "%")
 keymap.set("v", "M", "%")
@@ -49,10 +49,6 @@ keymap.set("n", "<leader>nh", ":nohl<CR>", { desc = "Clear search highlights" })
 -- Jumplist
 keymap.set("n", "<C-m>", "<C-i>", opts)
 
--- New tab
-keymap.set("n", "te", ":tabedit")
-keymap.set("n", "<tab>", ":tabnext<Return>", opts)
-keymap.set("n", "<s-tab>", ":tabprev<Return>", opts)
 -- Split window
 keymap.set("n", "ss", ":split<Return>", opts)
 keymap.set("n", "sv", ":vsplit<Return>", opts)
