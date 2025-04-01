@@ -1,30 +1,54 @@
--- Options are automatically loaded before lazy.nvim startup
--- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
--- Add any additional options here
---
---
+local go = vim.g
+local o = vim.opt
 
-vim.cmd("let g:netrw_liststyle = 3")
-local opt = vim.opt -- for conciseness
+-- Optimizations on startup
+vim.loader.enable()
 
--- line numbers
-opt.relativenumber = true -- show relative line numbers
-opt.number = true -- shows absolute line number on cursor line (when relative number is on)
-opt.shell = "fish"
--- tabs & indentation
-opt.tabstop = 2 -- 2 spaces for tabs (prettier default)
-opt.shiftwidth = 2 -- 2 spaces for indent width
-opt.expandtab = true -- expand tab to spaces
-opt.autoindent = true -- copy indent from current line when starting new one
+-- Personal Config and LazyVim global options
+go.lualine_info_extras = false
+go.codeium_cmp_hide = false
+go.lazygit_config = false
+go.lazyvim_cmp = "blink"
+go.lazyvim_picker = "snacks"
 
--- line wrapping
-opt.wrap = false -- disable line wrapping
+-- Define leader key
+go.mapleader = " "
+go.maplocalleader = "\\"
 
-opt.cursorline = false
--- search settings
-opt.ignorecase = true -- ignore case when searching
-opt.smartcase = true -- if you include mixed case in your search, assumes you want case-sensitive
+-- Autoformat on save (Global)
+go.autoformat = true
 
-vim.lsp.set_log_level("off")
-vim.g.matchparen_timeout = 2
-vim.g.matchparen_insert_timeout = 2
+-- Font
+go.gui_font_default_size = 10
+go.gui_font_size = go.gui_font_default_size
+go.gui_font_face = "JetBrainsMono Nerd Font"
+
+-- Enable EditorConfig integration
+go.editorconfig = true
+
+-- Root dir detection
+go.root_spec = {
+  "lsp",
+  { ".git", "lua", ".obsidian", "package.json", "Makefile", "go.mod", "cargo.toml", "pyproject.toml", "src" },
+  "cwd",
+}
+
+-- Disable annoying cmd line stuff
+o.showcmd = false
+o.laststatus = 3
+o.cmdheight = 0
+
+-- Enable spell checking
+o.spell = true
+o.spelllang:append("es")
+
+-- Backspacing and indentation when wrapping
+o.backspace = { "start", "eol", "indent" }
+o.breakindent = true
+
+-- Smoothscroll
+if vim.fn.has("nvim-0.10") == 1 then
+  o.smoothscroll = true
+end
+
+o.conceallevel = 2
