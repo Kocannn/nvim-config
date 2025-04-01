@@ -1,53 +1,77 @@
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
-  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
-  if vim.v.shell_error ~= 0 then
-    vim.api.nvim_echo({
-      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-      { out, "WarningMsg" },
-      { "\nPress any key to exit..." },
-    }, true, {})
-    vim.fn.getchar()
-    os.exit(1)
-  end
-end
-vim.opt.rtp:prepend(lazypath)
+-- FILE: ~/.config/nvim/lua/config/lazy.lua
+-- UPDATED: Saturday, January 11, 2025
 
-require("lazy").setup({
-  spec = {
-    -- add LazyVim and import its plugins
-    { "LazyVim/LazyVim", import = "lazyvim.plugins" },
-    -- import/override with your plugins
-    { import = "plugins" },
-  },
-  defaults = {
-    -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
-    -- If you know what you're doing, you can set this to `true` to have all your custom plugins lazy-loaded by default.
-    lazy = false,
-    -- It's recommended to leave version=false for now, since a lot the plugin that support versioning,
-    -- have outdated releases, which may break your Neovim install.
-    version = false, -- always use the latest git commit
-    -- version = "*", -- try installing the latest stable version for plugins that support semver
-  },
-  install = { colorscheme = { "tokyonight", "habamax" } },
-  checker = {
-    enabled = true, -- check for plugin updates periodically
-    notify = false, -- notify on update
-  }, -- automatically check for plugin updates
-  performance = {
-    rtp = {
-      -- disable some rtp plugins
-      disabled_plugins = {
-        "gzip",
-        -- "matchit",
-        -- "matchparen",
-        -- "netrwPlugin",
-        "tarPlugin",
-        "tohtml",
-        "tutor",
-        "zipPlugin",
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.uv.fs_stat(lazypath) then
+  -- Bootstrap lazy.nvim
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable",
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
+
+-- Setup lazy.nvim
+local status_lazy, err_lazy = pcall(function()
+  require("lazy").setup({
+    spec = {
+      {
+        "LazyVim/LazyVim",
+        import = "lazyvim.plugins",
+        opts = {
+          colorscheme = "catppuccin",
+        },
+      },
+      {
+        import = "plugins",
       },
     },
-  },
-})
+    ui = {
+      backdrop = 100,
+    },
+    defaults = {
+      lazy = true,
+      version = false, -- always use the latest git commit
+    },
+    log = { -- Logging configuration
+      level = "debug",
+      path = vim.fn.stdpath("cache") .. "/lazy.log",
+    },
+    local_spec = true,
+    checker = { enabled = true },
+    performance = {
+      cache = {
+        enabled = true,
+      },
+      rtp = {
+        disabled_plugins = {
+          "gzip",
+          "tarPlugin",
+          "tohtml",
+          "tutor",
+          "netrwPlugin",
+          "zipPlugin",
+        },
+      },
+    },
+  })
+end)
+
+if not status_lazy then
+  vim.notify("Error setting up lazy.nvim: " .. err_lazy, vim.log.levels.ERROR)
+end
+
+-- Now require your configuration files
+local status_opts, err_opts = pcall(require, "config.options")
+if not status_opts then
+  vim.notify("Error loading config.options: " .. err_opts, vim.log.levels.ERROR)
+end
+
+local status_kmaps, err_kmaps = pcall(require, "config.keymaps")
+if not status_kmaps then
+  vim.notify("Error loading config.keymaps: " .. err_kmaps, vim.log.levels.ERROR)
+end
