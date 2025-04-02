@@ -225,8 +225,8 @@ map({ "c", "i", "t" }, "<M-BS>", "<C-w>", { desc = "Delete Word" })
 map("n", "<leader>ghb", Snacks.git.blame_line, { desc = "Blame Line" })
 
 -- Windows Split
-map("n", "<leader>_", "<C-W>s", { desc = "Split Window Below", remap = true })
-map("n", "<leader>\\", "<C-W>v", { desc = "Split Window Right", remap = true })
+map("n", "ss", "<C-W>s", { desc = "Split Window Below", remap = true })
+map("n", "sv", "<C-W>v", { desc = "Split Window Right", remap = true })
 
 -- Center when scrolling
 if Snacks.scroll.enabled then
@@ -246,3 +246,10 @@ if Snacks.scroll.enabled then
     return "<c-u>"
   end, { expr = true })
 end
+
+map("i", "jk", "<ESC>")
+
+-- Diagnostics
+map("n", "<C-j>", function()
+  vim.diagnostic.goto_next()
+end, opts)

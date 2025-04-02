@@ -26,7 +26,6 @@
     "rust-analyzer",
     "shellcheck",
     "shfmt",
-    "stylelint",
     "stylua",
     "tailwindcss-language-server",
     "taplo",
@@ -4945,4 +4944,3 @@
     "yamlls"
   ]
 }
-
