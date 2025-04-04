@@ -11,15 +11,15 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
-local lazy_config = require "configs.lazy"
+local lazy_config = require "kocan.configs.lazy"
 
 -- load theme
 dofile(vim.g.base46_cache .. "defaults")
 dofile(vim.g.base46_cache .. "statusline")
 
-require "options"
+require "kocan.options"
 require "kocan.autocmds"
 
 vim.schedule(function()
-  require "mappings"
+  require "kocan.mappings"
 end)
