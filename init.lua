@@ -1,2 +1,2 @@
 require("kocan.core")
-require("kocan.lazy")
+require("kocan.init")

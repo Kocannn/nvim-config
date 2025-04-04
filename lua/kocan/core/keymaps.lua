@@ -8,7 +8,7 @@ map("i", "<C-l>", "<Right>", { desc = "move right" })
 map("i", "<C-j>", "<Down>", { desc = "move down" })
 map("i", "<C-k>", "<Up>", { desc = "move up" })
 
-map("i", "jk", "<ESC>", opts) 
+map("i", "jk", "<ESC>", opts)
 
 map("n", "sh", "<C-w>h", { desc = "switch window left" })
 map("n", "sl", "<C-w>l", { desc = "switch window right" })
@@ -105,3 +105,10 @@ map("n", "<leader>wk", function()
   vim.cmd("WhichKey " .. vim.fn.input "WhichKey: ")
 end, { desc = "whichkey query lookup" })
 
+
+
+
+-- Diagnostics
+map("n", "<C-j>", function()
+  vim.diagnostic.goto_next()
+end, opts)
