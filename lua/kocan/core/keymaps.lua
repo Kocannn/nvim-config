@@ -1,4 +1,5 @@
 local map = vim.keymap.set
+local opts = { noremap = true, silent = true }
 
 map("i", "<C-b>", "<ESC>^i", { desc = "move beginning of line" })
 map("i", "<C-e>", "<End>", { desc = "move end of line" })
@@ -7,7 +8,7 @@ map("i", "<C-l>", "<Right>", { desc = "move right" })
 map("i", "<C-j>", "<Down>", { desc = "move down" })
 map("i", "<C-k>", "<Up>", { desc = "move up" })
 
-map("i", "jk", "<ESC>",) 
+map("i", "jk", "<ESC>", opts) 
 
 map("n", "sh", "<C-w>h", { desc = "switch window left" })
 map("n", "sl", "<C-w>l", { desc = "switch window right" })
