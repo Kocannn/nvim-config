@@ -51,7 +51,7 @@ return {
     "nvim-tree/nvim-tree.lua",
     cmd = { "NvimTreeToggle", "NvimTreeFocus" },
     opts = function()
-      return require "nvchad.configs.nvimtree"
+      return require "kocan.plugins.configs.nvimtree"
     end,
   },
 
@@ -73,21 +73,13 @@ return {
     },
   },
 
-  -- git stuff
-  {
-    "lewis6991/gitsigns.nvim",
-    event = "User FilePost",
-    opts = function()
-      return require "nvchad.configs.gitsigns"
-    end,
-  },
 
   -- lsp stuff
   {
     "williamboman/mason.nvim",
     cmd = { "Mason", "MasonInstall", "MasonUpdate" },
     opts = function()
-      return require "nvchad.configs.mason"
+      return require "kocan.plugins.configs.mason"
     end,
   },
 
@@ -95,7 +87,7 @@ return {
     "neovim/nvim-lspconfig",
     event = "User FilePost",
     config = function()
-      require("nvchad.configs.lspconfig").defaults()
+      require("kocan.plugins.configs.lspconfig").defaults()
     end,
   },
 
@@ -111,9 +103,10 @@ return {
         opts = { history = true, updateevents = "TextChanged,TextChangedI" },
         config = function(_, opts)
           require("luasnip").config.set_config(opts)
-          require "nvchad.configs.luasnip"
+          require "kocan.plugins.configs.luasnip"
         end,
       },
+
 
       -- autopairing of (){}[] etc
       {
@@ -131,6 +124,7 @@ return {
         end,
       },
 
+      
       -- cmp sources plugins
       {
         "saadparwaiz1/cmp_luasnip",
@@ -141,7 +135,7 @@ return {
       },
     },
     opts = function()
-      return require "nvchad.configs.cmp"
+      return require "kocan.plugins.configs.cmp"
     end,
   },
 
@@ -150,7 +144,7 @@ return {
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     cmd = "Telescope",
     opts = function()
-      return require "nvchad.configs.telescope"
+      return require "kocan.plugins.configs.telescope"
     end,
   },
 
@@ -160,7 +154,7 @@ return {
     cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
     build = ":TSUpdate",
     opts = function()
-      return require "nvchad.configs.treesitter"
+      return require "kocan.plugins.configs.treesitter"
     end,
     config = function(_, opts)
       require("nvim-treesitter.configs").setup(opts)
