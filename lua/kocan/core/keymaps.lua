@@ -110,3 +110,10 @@ end, { desc = "whichkey query lookup" })
 map("n", "<C-j>", function()
 	vim.diagnostic.goto_next()
 end, opts)
+
+vim.keymap.set("n", "<leader>gg", function()
+	-- Buka terminal di buffer utama
+	vim.cmd("enew") -- buka buffer kosong baru
+	vim.cmd("terminal lazygit")
+	vim.cmd("startinsert") -- langsung masuk ke mode terminal
+end, { desc = "Open LazyGit in main buffer" })
