@@ -1,5 +1,11 @@
 local map = vim.keymap.set
+local nomap = vim.keymap.del
 local opts = { noremap = true, silent = true }
+
+map("i", "<C-u>", "<Nop>", opts)
+map("i", "<C-i>", "<Nop>", opts)
+map("i", "<C-n>", "<Nop>", opts)
+map("i", "<C-p>", "<Nop>", opts)
 
 map("i", "<C-b>", "<ESC>^i", { desc = "move beginning of line" })
 map("i", "<C-e>", "<End>", { desc = "move end of line" })
@@ -29,7 +35,7 @@ end, { desc = "general format file" })
 map("n", "<leader>ds", vim.diagnostic.setloclist, { desc = "LSP diagnostic loclist" })
 
 -- tabufline
-map("n", "<leader>b", "<cmd>enew<CR>", { desc = "buffer new" })
+map("n", "<leader>bn", "<cmd>enew<CR>", { desc = "buffer new" })
 
 map("n", "<tab>", function()
 	require("nvchad.tabufline").next()
@@ -48,11 +54,10 @@ map("n", "<leader>/", "gcc", { desc = "toggle comment", remap = true })
 map("v", "<leader>/", "gc", { desc = "toggle comment", remap = true })
 
 -- nvimtree
-map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle window" })
-map("n", "<leader>e", "<cmd>NvimTreeFocus<CR>", { desc = "nvimtree focus window" })
+map("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle window" })
 
 -- telescope
-map("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", { desc = "telescope live grep" })
+map("n", "<leader>fs", "<cmd>Telescope live_grep<CR>", { desc = "telescope live grep" })
 map("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "telescope find buffers" })
 map("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", { desc = "telescope help page" })
 map("n", "<leader>ma", "<cmd>Telescope marks<CR>", { desc = "telescope find marks" })
@@ -75,7 +80,7 @@ map(
 )
 
 -- terminal
-map("t", "<C-x>", "<C-\\><C-N>", { desc = "terminal escape terminal mode" })
+map("t", "jk", "<C-\\><C-N>", { desc = "terminal escape terminal mode" })
 
 -- new terminals
 map("n", "<leader>h", function()
@@ -129,3 +134,9 @@ if vim.fn.executable("lazygit") == 1 then
 		Snacks.picker.git_log()
 	end, { desc = "Git Log (cwd)" })
 end
+
+-- Resize window
+map("n", "<C-w><left>", "<C-w><")
+map("n", "<C-w><right>", "<C-w>>")
+map("n", "<C-w><up>", "<C-w>+")
+map("n", "<C-w><down>", "<C-w>-")
