@@ -111,9 +111,21 @@ map("n", "<C-j>", function()
 	vim.diagnostic.goto_next()
 end, opts)
 
-vim.keymap.set("n", "<leader>gg", function()
-	-- Buka terminal di buffer utama
-	vim.cmd("enew") -- buka buffer kosong baru
-	vim.cmd("terminal lazygit")
-	vim.cmd("startinsert") -- langsung masuk ke mode terminal
-end, { desc = "Open LazyGit in main buffer" })
+-- lazygit
+if vim.fn.executable("lazygit") == 1 then
+	map("n", "<leader>gg", function()
+		Snacks.lazygit({ cwd = vim.loop.cwd() })
+	end, { desc = "Lazygit (Root Dir)" })
+	map("n", "<leader>gG", function()
+		Snacks.lazygit()
+	end, { desc = "Lazygit (cwd)" })
+	map("n", "<leader>gf", function()
+		Snacks.picker.git_log_file()
+	end, { desc = "Git Current File History" })
+	map("n", "<leader>gl", function()
+		Snacks.picker.git_log({ cwd = LazyVim.root.git() })
+	end, { desc = "Git Log" })
+	map("n", "<leader>gL", function()
+		Snacks.picker.git_log()
+	end, { desc = "Git Log (cwd)" })
+end
