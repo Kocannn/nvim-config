@@ -80,7 +80,7 @@ map(
 )
 
 -- terminal
-map("t", "jk", "<C-\\><C-N>", { desc = "terminal escape terminal mode" })
+map("t", "<C-x>", "<C-\\><C-N>", { desc = "terminal escape terminal mode" })
 
 -- new terminals
 map("n", "<leader>h", function()
