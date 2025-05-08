@@ -2,10 +2,13 @@ dofile(vim.g.base46_cache .. "telescope")
 
 return {
 	defaults = {
-		prompt_prefix = "   ",
+		prompt_prefix = "   ",
 		selection_caret = " ",
 		entry_prefix = " ",
 		sorting_strategy = "ascending",
+		layout_strategy = "horizontal",
+		wrap_results = true,
+		winblend = 0,
 		layout_config = {
 			horizontal = {
 				prompt_position = "top",
@@ -15,7 +18,9 @@ return {
 			height = 0.80,
 		},
 		mappings = {
-			n = { ["q"] = require("telescope.actions").close },
+			n = {
+				["q"] = require("telescope.actions").close,
+			},
 			i = {
 				["<C-j>"] = require("telescope.actions").move_selection_next,
 				["<C-k>"] = require("telescope.actions").move_selection_previous,
@@ -25,6 +30,43 @@ return {
 		},
 	},
 
-	extensions_list = { "themes", "terms" },
-	extensions = {},
+	pickers = {
+		diagnostics = {
+			theme = "ivy",
+			initial_mode = "normal",
+			layout_config = {
+				preview_cutoff = 9999,
+			},
+		},
+	},
+
+	extensions = {
+		file_browser = {
+			theme = "dropdown",
+			-- disables netrw and use telescope-file-browser in its place
+			hijack_netrw = true,
+			mappings = {
+				["n"] = {
+					-- your custom normal mode mappings
+					["N"] = require("telescope").extensions.file_browser.actions.create,
+					["h"] = require("telescope").extensions.file_browser.actions.goto_parent_dir,
+					["/"] = function()
+						vim.cmd("startinsert")
+					end,
+					["<C-u>"] = function(prompt_bufnr)
+						for _ = 1, 10 do
+							require("telescope.actions").move_selection_previous(prompt_bufnr)
+						end
+					end,
+					["<C-d>"] = function(prompt_bufnr)
+						for _ = 1, 10 do
+							require("telescope.actions").move_selection_next(prompt_bufnr)
+						end
+					end,
+					["<PageUp>"] = require("telescope.actions").preview_scrolling_up,
+					["<PageDown>"] = require("telescope.actions").preview_scrolling_down,
+				},
+			},
+		},
+	},
 }

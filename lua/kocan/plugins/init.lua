@@ -145,13 +145,147 @@ return {
 
 	{
 		"nvim-telescope/telescope.nvim",
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
+		dependencies = {
+			{
+				"nvim-telescope/telescope-fzf-native.nvim",
+				build = "make",
+			},
+			"nvim-telescope/telescope-file-browser.nvim",
+			"nvim-treesitter/nvim-treesitter",
+		},
 		cmd = "Telescope",
+		keys = {
+			{
+				"<leader>fP",
+				function()
+					require("telescope.builtin").find_files({
+						cwd = require("lazy.core.config").options.root,
+					})
+				end,
+				desc = "Find Plugin File",
+			},
+			{
+				";f",
+				function()
+					local builtin = require("telescope.builtin")
+					builtin.find_files({
+						no_ignore = false,
+						hidden = true,
+					})
+				end,
+				desc = "Lists files in your current working directory, respects .gitignore",
+			},
+			{
+				";r",
+				function()
+					local builtin = require("telescope.builtin")
+					builtin.live_grep({
+						additional_args = { "--hidden" },
+					})
+				end,
+				desc = "Search for a string in your current working directory and get results live as you type, respects .gitignore",
+			},
+			{
+				"\\\\",
+				function()
+					local builtin = require("telescope.builtin")
+					builtin.buffers()
+				end,
+				desc = "Lists open buffers",
+			},
+			{
+				";t",
+				function()
+					local builtin = require("telescope.builtin")
+					builtin.help_tags()
+				end,
+				desc = "Lists available help tags and opens a new window with the relevant help info on <cr>",
+			},
+			{
+				";;",
+				function()
+					local builtin = require("telescope.builtin")
+					builtin.resume()
+				end,
+				desc = "Resume the previous telescope picker",
+			},
+			{
+				";e",
+				function()
+					local builtin = require("telescope.builtin")
+					builtin.diagnostics()
+				end,
+				desc = "Lists Diagnostics for all open buffers or a specific buffer",
+			},
+			{
+				";s",
+				function()
+					local builtin = require("telescope.builtin")
+					builtin.treesitter()
+				end,
+				desc = "Lists Function names, variables, from Treesitter",
+			},
+			{
+				";c",
+				function()
+					local builtin = require("telescope.builtin")
+					builtin.lsp_incoming_calls()
+				end,
+				desc = "Lists LSP incoming calls for word under the cursor",
+			},
+			{
+				"sf",
+				function()
+					local telescope = require("telescope")
+
+					local function telescope_buffer_dir()
+						return vim.fn.expand("%:p:h")
+					end
+
+					telescope.extensions.file_browser.file_browser({
+						path = "%:p:h",
+						cwd = telescope_buffer_dir(),
+						respect_gitignore = false,
+						hidden = true,
+						grouped = true,
+						previewer = false,
+						initial_mode = "normal",
+						layout_config = { height = 40 },
+					})
+				end,
+				desc = "Open File Browser with the path of the current buffer",
+			},
+		},
 		opts = function()
 			return require("kocan.plugins.configs.telescope")
 		end,
+		config = function(_, opts)
+			require("telescope").setup(opts)
+			-- Safe extension loading
+			local status_ok, _ = pcall(require("telescope").load_extension, "fzf")
+			if not status_ok then
+				vim.notify(
+					"FZF extension not loaded. Run 'cd ~/.local/share/nvim/lazy/telescope-fzf-native.nvim && make' to build it.",
+					vim.log.levels.WARN
+				)
+			end
+			require("telescope").load_extension("file_browser")
+		end,
 	},
-
+	{
+		"folke/flash.nvim",
+		event = "VeryLazy",
+		---@type Flash.Config
+		opts = {},
+  -- stylua: ignore
+  keys = {
+    { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+    { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+    { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+    { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+    { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+  },
+	},
 	{
 		"nvim-treesitter/nvim-treesitter",
 		event = { "BufReadPost", "BufNewFile" },

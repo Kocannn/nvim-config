@@ -52,7 +52,8 @@ M.capabilities.textDocument.completion.completionItem = {
 	},
 }
 
-M.servers = { "html", "cssls", "ts_ls", "lua_ls", "gopls" }
+M.servers =
+	{ "html", "cssls", "buf_ls", "ts_ls", "lua_ls", "gopls", "pbls", "stimulus_ls", "prosemd_lsp", "golangci_lint_ls" }
 
 M.defaults = function()
 	dofile(vim.g.base46_cache .. "lsp")
@@ -67,7 +68,6 @@ M.defaults = function()
 	end
 
 	-- Konfig khusus buat lua
-
 	require("lspconfig").lua_ls.setup({
 		on_attach = M.on_attach,
 		capabilities = M.capabilities,
