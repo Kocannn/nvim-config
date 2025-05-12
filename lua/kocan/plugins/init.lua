@@ -53,6 +53,13 @@ return {
 			return require("kocan.plugins.configs.nvimtree")
 		end,
 	},
+	{
+		"lewis6991/gitsigns.nvim",
+		event = "VeryLazy",
+		opts = function()
+			return require("kocan.plugins.configs.gitsigns")
+		end,
+	},
 
 	{
 		"folke/which-key.nvim",
@@ -237,7 +244,6 @@ return {
 				"sf",
 				function()
 					local telescope = require("telescope")
-
 					local function telescope_buffer_dir()
 						return vim.fn.expand("%:p:h")
 					end
