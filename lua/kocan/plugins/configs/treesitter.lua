@@ -17,6 +17,7 @@ return {
 		"markdown",
 		"markdown_inline",
 		"sql",
+		"php",
 	},
 	auto_install = true,
 

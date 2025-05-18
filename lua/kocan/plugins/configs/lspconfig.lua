@@ -52,8 +52,19 @@ M.capabilities.textDocument.completion.completionItem = {
 	},
 }
 
-M.servers =
-	{ "html", "cssls", "buf_ls", "ts_ls", "lua_ls", "gopls", "pbls", "stimulus_ls", "prosemd_lsp", "golangci_lint_ls" }
+M.servers = {
+	"html",
+	"cssls",
+	"buf_ls",
+	"ts_ls",
+	"lua_ls",
+	"gopls",
+	"pbls",
+	"stimulus_ls",
+	"prosemd_lsp",
+	"golangci_lint_ls",
+	"laravel_ls",
+}
 
 M.defaults = function()
 	dofile(vim.g.base46_cache .. "lsp")
