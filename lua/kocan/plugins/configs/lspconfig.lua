@@ -64,6 +64,7 @@ M.servers = {
 	"prosemd_lsp",
 	"golangci_lint_ls",
 	"laravel_ls",
+	"intelephense",
 }
 
 M.defaults = function()
@@ -72,6 +73,7 @@ M.defaults = function()
 
 	for _, lsp in ipairs(M.servers) do
 		lspconfig[lsp].setup({
+			ensure_installed = lsp,
 			on_attach = M.on_attach,
 			on_init = M.on_init,
 			capabilities = M.capabilities,
