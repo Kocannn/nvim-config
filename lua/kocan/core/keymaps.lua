@@ -58,7 +58,6 @@ map("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle windo
 
 -- telescope
 map("n", "<leader>fs", "<cmd>Telescope live_grep<CR>", { desc = "telescope live grep" })
-map("n", "<leader>fb", "<cmd>Telescope buffers<CR>", { desc = "telescope find buffers" })
 map("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", { desc = "telescope help page" })
 map("n", "<leader>ma", "<cmd>Telescope marks<CR>", { desc = "telescope find marks" })
 map("n", "<leader>fo", "<cmd>Telescope oldfiles<CR>", { desc = "telescope find oldfiles" })

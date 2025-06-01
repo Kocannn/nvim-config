@@ -164,26 +164,6 @@ return {
 		cmd = "Telescope",
 		keys = {
 			{
-				"<leader>fP",
-				function()
-					require("telescope.builtin").find_files({
-						cwd = require("lazy.core.config").options.root,
-					})
-				end,
-				desc = "Find Plugin File",
-			},
-			{
-				";f",
-				function()
-					local builtin = require("telescope.builtin")
-					builtin.find_files({
-						no_ignore = false,
-						hidden = true,
-					})
-				end,
-				desc = "Lists files in your current working directory, respects .gitignore",
-			},
-			{
 				";r",
 				function()
 					local builtin = require("telescope.builtin")
@@ -200,46 +180,6 @@ return {
 					builtin.buffers()
 				end,
 				desc = "Lists open buffers",
-			},
-			{
-				";t",
-				function()
-					local builtin = require("telescope.builtin")
-					builtin.help_tags()
-				end,
-				desc = "Lists available help tags and opens a new window with the relevant help info on <cr>",
-			},
-			{
-				";;",
-				function()
-					local builtin = require("telescope.builtin")
-					builtin.resume()
-				end,
-				desc = "Resume the previous telescope picker",
-			},
-			{
-				";e",
-				function()
-					local builtin = require("telescope.builtin")
-					builtin.diagnostics()
-				end,
-				desc = "Lists Diagnostics for all open buffers or a specific buffer",
-			},
-			{
-				";s",
-				function()
-					local builtin = require("telescope.builtin")
-					builtin.treesitter()
-				end,
-				desc = "Lists Function names, variables, from Treesitter",
-			},
-			{
-				";c",
-				function()
-					local builtin = require("telescope.builtin")
-					builtin.lsp_incoming_calls()
-				end,
-				desc = "Lists LSP incoming calls for word under the cursor",
 			},
 			{
 				"sf",
@@ -420,5 +360,80 @@ return {
 			-- HACK: restore vim.notify after snacks setup and let noice.nvim take over
 			-- this is needed to have early notifications show up in noice history
 		end,
+	},
+
+	-- fuzzy finder
+	{
+		"ibhagwan/fzf-lua",
+		-- optional for icon support
+		-- dependencies = { "nvim-tree/nvim-web-devicons" },
+		-- or if using mini.icons/mini.nvim
+		dependencies = { "echasnovski/mini.icons" },
+		opts = {},
+		keys = {
+			{
+				"<leader>fg",
+				function()
+					require("fzf-lua").live_grep()
+				end,
+				desc = "Find by grepping in project directory",
+			},
+			{
+				"<leader>fc",
+				function()
+					require("fzf-lua").files({ cwd = vim.fn.stdpath("config") })
+				end,
+				desc = "Find in neovim configuration",
+			},
+			{
+				"<leader>fk",
+				function()
+					require("fzf-lua").keymaps()
+				end,
+				desc = "[F]ind [K]eymaps",
+			},
+			{
+				"<leader>fb",
+				function()
+					require("fzf-lua").builtin()
+				end,
+				desc = "[F]ind [B]uiltin FZF",
+			},
+			{
+				"<leader>fw",
+				function()
+					require("fzf-lua").grep_cword()
+				end,
+				desc = "[F]ind current [W]ord",
+			},
+			{
+				"<leader>fW",
+				function()
+					require("fzf-lua").grep_cWORD()
+				end,
+				desc = "[F]ind current [W]ORD",
+			},
+			{
+				"<leader>fd",
+				function()
+					require("fzf-lua").diagnostics_document()
+				end,
+				desc = "[F]ind [D]iagnostics",
+			},
+		},
+	},
+
+	-- auto-session
+	{
+		"rmagatti/auto-session",
+		lazy = false,
+
+		---enables autocomplete for opts
+		---@module "auto-session"
+		---@type AutoSession.Config
+		opts = {
+			suppressed_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
+			-- log_level = 'debug',
+		},
 	},
 }
