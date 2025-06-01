@@ -56,6 +56,7 @@ return {
 	{
 		"lewis6991/gitsigns.nvim",
 		event = "VeryLazy",
+		version = "false",
 		opts = function()
 			return require("kocan.plugins.configs.gitsigns")
 		end,
@@ -294,7 +295,7 @@ return {
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
-		event = { "BufReadPost", "BufNewFile" },
+		-- event = { "BufReadPost", "BufNewFile" },
 		cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
 		build = ":TSUpdate",
 		opts = function()

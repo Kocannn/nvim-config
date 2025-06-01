@@ -18,6 +18,9 @@ return {
 		"markdown_inline",
 		"sql",
 		"php",
+		"html",
+		"css",
+		"dockerfile",
 	},
 	auto_install = true,
 
