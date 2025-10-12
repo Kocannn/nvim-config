@@ -14,7 +14,7 @@ return {
 
   -- LSP
   { "folke/neodev.nvim" },
-  { "williamboman/mason-lspconfig.nvim" },
+  { "mason-org/mason-lspconfig.nvim" },
 
   -- TreeSitter
   { "nvim-treesitter/nvim-treesitter" },

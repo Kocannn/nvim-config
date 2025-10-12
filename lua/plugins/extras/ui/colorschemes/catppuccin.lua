@@ -106,37 +106,21 @@ return {
   },
   {
     "akinsho/bufferline.nvim",
-    opts = {
-      highlights = require("catppuccin.groups.integrations.bufferline").get({
-        styles = { "italic", "bold" },
-        custom = {
-          all = {
-            fill = {
-              bg = palette.mantle,
-            },
-            separator_selected = {
-              bg = palette.base,
-              fg = palette.mantle,
-            },
-            separator = {
-              bg = palette.mantle,
-              fg = palette.mantle,
-            },
-            tab_separator = {
-              bg = palette.mantle,
-              fg = palette.mantle,
-            },
-            tab_selected = {
-              bg = palette.base,
-            },
-            tab_separator_selected = {
-              bg = palette.base,
-              fg = palette.mantle,
-            },
-          },
-        },
-      }),
-    },
+    opts = function(_, opts)
+      local cp = require("catppuccin.palettes").get_palette("macchiato")
+      opts.highlights = {
+        fill = { bg = cp.mantle },
+        background = { bg = cp.mantle },
+        separator = { fg = cp.mantle, bg = cp.mantle },
+        separator_selected = { fg = cp.mantle, bg = cp.base },
+        separator_visible = { fg = cp.mantle, bg = cp.mantle },
+        tab = { bg = cp.mantle },
+        tab_selected = { bg = cp.base },
+        tab_separator = { fg = cp.mantle, bg = cp.mantle },
+        tab_separator_selected = { fg = cp.mantle, bg = cp.base },
+      }
+      return opts
+    end,
   },
   {
     "rasulomaroff/reactive.nvim",
