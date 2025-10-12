@@ -60,11 +60,11 @@ M.servers = {
 	"lua_ls",
 	"gopls",
 	"pbls",
-	"stimulus_ls",
+	-- "stimulus_ls",
 	"prosemd_lsp",
 	"golangci_lint_ls",
 	"laravel_ls",
-	"intelephense",
+	-- "intelephense",
 }
 
 M.defaults = function()

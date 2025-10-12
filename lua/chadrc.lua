@@ -6,7 +6,7 @@
 local M = {}
 
 M.base46 = {
-	theme = "solarized_osaka",
+	theme = "gruvchad",
 	transparency = true,
 
 	-- hl_override = {
@@ -34,9 +34,9 @@ M.ui = {
 		lazyload = false,
 	},
 	-- statusline = {
-	--   theme = "minimal",
-	--   separator_style = "round",
-	-- }
+	-- 	-- theme = "minimal",
+	-- 	-- separator_style = "round",
+	-- },
 }
 
 return M
