@@ -768,25 +768,25 @@ return {
 			lualine.setup(config)
 		end,
 	},
-	{
-		"olimorris/codecompanion.nvim",
-		lazy = false,
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-treesitter/nvim-treesitter",
-		},
-		keys = {
-			{
-				"<leader>cc",
-				function()
-					require("codecompanion").actions()
-				end,
-				desc = "Open CodeCompanion Chat",
-				mode = { "n", "v" },
-			},
-		},
-		config = require("kocan.plugins.configs.codecompanion"),
-	},
+	-- {
+	-- 	"olimorris/codecompanion.nvim",
+	-- 	lazy = false,
+	-- 	dependencies = {
+	-- 		"nvim-lua/plenary.nvim",
+	-- 		"nvim-treesitter/nvim-treesitter",
+	-- 	},
+	-- 	keys = {
+	-- 		{
+	-- 			"<leader>cc",
+	-- 			function()
+	-- 				require("codecompanion").actions()
+	-- 			end,
+	-- 			desc = "Open CodeCompanion Chat",
+	-- 			mode = { "n", "v" },
+	-- 		},
+	-- 	},
+	-- 	config = require("kocan.plugins.configs.codecompanion"),
+	-- },
 
 	-- install without yarn or npm
 	{
